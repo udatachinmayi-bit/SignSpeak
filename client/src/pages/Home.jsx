@@ -1,31 +1,11 @@
 import Navbar from "../components/Navbar";
 
 const gestures = [
-  {
-    emoji: "✋",
-    title: "HELLO",
-    description: "Open palm gesture",
-  },
-  {
-    emoji: "👍",
-    title: "YES",
-    description: "Thumb up gesture",
-  },
-  {
-    emoji: "👎",
-    title: "NO",
-    description: "Thumb down gesture",
-  },
-  {
-    emoji: "☝️",
-    title: "HELP",
-    description: "Point one finger up",
-  },
-  {
-    emoji: "✊",
-    title: "STOP",
-    description: "Closed fist gesture",
-  },
+  { emoji: "✋", title: "HELLO" },
+  { emoji: "👍", title: "YES" },
+  { emoji: "👎", title: "NO" },
+  { emoji: "☝️", title: "HELP" },
+  { emoji: "✊", title: "STOP" },
 ];
 
 const Home = () => {
@@ -33,40 +13,52 @@ const Home = () => {
     <>
       <Navbar />
 
-      <div className="min-h-screen bg-gray-100 px-8 py-10">
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-gray-800">
-            SignSpeak
-          </h1>
+      <div className="min-h-screen relative overflow-hidden bg-slate-950 text-white px-6 py-12">
+        {/* Animated Background */}
+        <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
 
-          <p className="text-xl text-gray-600 mt-4">
-            Helping non-verbal people communicate using gestures
-          </p>
-        </div>
+        <div className="relative z-10">
+          <div className="max-w-6xl mx-auto text-center">
+            <h1 className="text-6xl font-extrabold">
+              Welcome to{" "}
+              <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                SignSpeak
+              </span>
+            </h1>
 
-        <h2 className="text-3xl font-bold text-center mb-10">
-          Supported Gestures
-        </h2>
+            <p className="text-xl text-gray-300 mt-6 max-w-3xl mx-auto leading-9">
+              Empowering communication for non-verbal individuals
+              through real-time AI-powered hand gesture recognition.
+            </p>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {gestures.map((gesture, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-2xl shadow-lg p-8 text-center hover:scale-105 transition"
-            >
-              <div className="text-6xl mb-4">
-                {gesture.emoji}
-              </div>
+            <h2 className="text-4xl font-bold mt-20 mb-12">
+              Supported Gestures
+            </h2>
 
-              <h3 className="text-2xl font-bold text-blue-600">
-                {gesture.title}
-              </h3>
+            <div className="grid md:grid-cols-3 gap-8">
+              {gestures.map((gesture, index) => (
+                <div
+                  key={index}
+                  className="bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl shadow-2xl p-10 hover:scale-105 transition duration-300"
+                >
+                  <div className="text-7xl mb-4">
+                    {gesture.emoji}
+                  </div>
 
-              <p className="text-gray-600 mt-3">
-                {gesture.description}
+                  <h3 className="text-2xl font-bold">
+                    {gesture.title}
+                  </h3>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-20">
+              <p className="text-2xl font-semibold text-gray-300">
+                💙 Breaking communication barriers with technology
               </p>
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </>
