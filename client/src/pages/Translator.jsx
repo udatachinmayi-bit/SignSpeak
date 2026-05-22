@@ -183,10 +183,15 @@ const Translator = () => {
     <>
       <Navbar />
 
-      <div className="min-h-screen bg-slate-950 text-white px-6 py-10">
-        <div className="max-w-7xl mx-auto">
+      <div className="min-h-screen relative overflow-hidden bg-slate-950 text-white px-6 py-10">
+        {/* Background */}
+        <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+
+        <div className="relative z-10 max-w-7xl mx-auto">
+          {/* Header */}
           <div className="text-center mb-12">
-            <h1 className="text-6xl font-bold">
+            <h1 className="text-6xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
               SignSpeak Translator
             </h1>
 
@@ -195,8 +200,10 @@ const Translator = () => {
             </p>
           </div>
 
+          {/* Main */}
           <div className="grid lg:grid-cols-2 gap-10">
-            <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8">
+            {/* Camera */}
+            <div className="bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl shadow-2xl p-8">
               <div className="flex items-center gap-4 mb-6">
                 <FaCamera className="text-3xl text-cyan-400" />
                 <h2 className="text-3xl font-bold">
@@ -208,63 +215,103 @@ const Translator = () => {
                 ref={webcamRef}
                 audio={false}
                 mirrored={true}
-                className="w-full rounded-3xl"
+                className="w-full rounded-3xl border border-white/10"
               />
             </div>
 
+            {/* Right */}
             <div className="flex flex-col gap-8">
-              <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8">
+              {/* Output */}
+              <div className="bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl shadow-2xl p-8">
                 <div className="flex items-center gap-4 mb-6">
                   <FaMicrophoneAlt className="text-3xl text-green-400" />
                   <h2 className="text-3xl font-bold">
-                    Output
+                    Translation Output
                   </h2>
                 </div>
 
-                <h3 className="text-5xl font-bold text-center">
-                  {gesture}
-                </h3>
+                <div className="bg-gradient-to-br from-white/10 to-white/5 rounded-3xl p-10 text-center border border-white/10">
+                  <h3 className="text-5xl font-bold">
+                    {gesture}
+                  </h3>
 
-                <p className="text-center mt-4 text-gray-300">
-                  {status}
-                </p>
-
-                <div className="mt-6">
-                  <p className="mb-2">
-                    Confidence: {confidence}%
+                  <p className="text-gray-300 mt-4">
+                    {status}
                   </p>
 
-                  <div className="w-full h-4 bg-gray-700 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-cyan-400 transition-all"
-                      style={{
-                        width: `${confidence}%`,
-                      }}
-                    />
+                  <div className="mt-6">
+                    <div className="flex justify-between text-sm text-gray-400 mb-2">
+                      <span>Confidence</span>
+                      <span>{confidence}%</span>
+                    </div>
+
+                    <div className="w-full h-4 bg-gray-700 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-cyan-400 to-purple-500 transition-all duration-500"
+                        style={{
+                          width: `${confidence}%`,
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8">
-                <h2 className="text-3xl font-bold mb-6">
-                  Supported Gestures
-                </h2>
+              {/* Enhanced Supported Gestures */}
+              <div className="bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl shadow-2xl p-8">
+                <div className="flex items-center justify-between mb-8">
+                  <div>
+                    <h2 className="text-3xl font-bold">
+                      Supported Gestures
+                    </h2>
+                    <p className="text-gray-300 mt-2">
+                      AI-recognized communication gestures
+                    </p>
+                  </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                  <div className="px-4 py-2 rounded-full bg-cyan-500/20 border border-cyan-400/30 text-cyan-300 font-semibold">
+                    7 Gestures
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
                   {gestures.map((g, index) => (
                     <div
                       key={index}
-                      className="bg-white/10 rounded-2xl p-4 text-center"
+                      className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 p-6 hover:scale-105 hover:border-cyan-400/40 transition-all duration-300 shadow-xl"
                     >
-                      <div className="text-4xl mb-2">
-                        {g.icon}
+                      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition"></div>
+
+                      <div className="relative z-10 text-center">
+                        <div className="text-5xl mb-4 group-hover:scale-110 transition">
+                          {g.icon}
+                        </div>
+
+                        <h3 className="text-lg font-bold">
+                          {g.label}
+                        </h3>
+
+                        <div className="mt-3 h-1 w-12 mx-auto rounded-full bg-gradient-to-r from-cyan-400 to-purple-400"></div>
                       </div>
-                      <p>{g.label}</p>
                     </div>
                   ))}
                 </div>
+
+                <div className="mt-8 rounded-2xl bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-white/10 p-5 text-center">
+                  <p className="text-gray-300">
+                    Show your hand clearly in front of the camera
+                    for better recognition accuracy.
+                  </p>
+                </div>
               </div>
             </div>
+          </div>
+
+          {/* Footer */}
+          <div className="text-center mt-14">
+            <p className="text-2xl font-semibold text-gray-300">
+              💙 Giving gestures a voice
+            </p>
           </div>
         </div>
       </div>
