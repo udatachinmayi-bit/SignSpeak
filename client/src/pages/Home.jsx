@@ -6,6 +6,8 @@ const gestures = [
   { emoji: "👎", title: "NO" },
   { emoji: "☝️", title: "HELP" },
   { emoji: "✊", title: "STOP" },
+  { emoji: "✌️", title: "THANK YOU" },
+  { emoji: "🤟", title: "I LOVE YOU" },
 ];
 
 const Home = () => {
